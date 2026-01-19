@@ -5,12 +5,12 @@ import type { Asset, Entry, EntrySkeletonType } from "contentful";
 export interface BlogPostFields {
   title: string;
   slug: string;
-  excerpt?: string;
-  content: Document;
-  category?: string;
-  featuredImage?: Asset;
+  body: Document;
+  author?: Entry<EntrySkeletonType>;
   createdAt: string;
-  author?: string;
+  categoryTags?: Entry<EntrySkeletonType>[];
+  excerpt?: string;
+  featuredImage?: Asset;
 }
 
 export interface BlogPostSkeleton extends EntrySkeletonType {
@@ -116,6 +116,18 @@ export interface EventSkeleton extends EntrySkeletonType {
 }
 
 export type EventEntry = Entry<EventSkeleton>;
+
+// Main Logo (logo with or without text)
+export interface MainLogoFields {
+  logo: Asset;
+}
+
+export interface MainLogoSkeleton extends EntrySkeletonType {
+  contentTypeId: "mainLogo";
+  fields: MainLogoFields;
+}
+
+export type MainLogoEntry = Entry<MainLogoSkeleton>;
 
 // Helper type for document categories
 export const DOCUMENT_CATEGORIES = {

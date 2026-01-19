@@ -22,9 +22,9 @@ interface FormData {
 }
 
 const inquiryTypes = [
+  { value: "general" as InquiryType, label: "General Inquiry", icon: Mail },
   { value: "complaint" as InquiryType, label: "Submit a Complaint", icon: AlertCircle },
   { value: "suggestion" as InquiryType, label: "Submit a Suggestion", icon: Lightbulb },
-  { value: "general" as InquiryType, label: "General Inquiry", icon: Mail },
 ];
 
 export function ContactForm() {
@@ -98,7 +98,7 @@ export function ContactForm() {
             : formData.inquiryType === "suggestion"
               ? "suggestion"
               : "inquiry"}{" "}
-          and will respond within 2-3 business days.
+          and will respond within 1-3 business days.
         </AlertDescription>
       </Alert>
     );

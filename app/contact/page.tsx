@@ -59,7 +59,7 @@ export default async function ContactPage() {
               </div>
               <div>
                 <p className="text-muted-foreground text-sm font-medium">Response Time</p>
-                <p>We typically respond within 2-3 business days</p>
+                <p>We typically respond within 1-3 business days</p>
               </div>
             </CardContent>
           </Card>
@@ -82,10 +82,10 @@ export default async function ContactPage() {
 
           <Card className="border-hoa-blue bg-hoa-blue/5">
             <CardContent className="p-6">
-              <h3 className="text-hoa-navy mb-2 font-semibold">Office Hours</h3>
+              <h3 className="text-hoa-navy mb-2 font-semibold">Board Meetings</h3>
               <p className="text-muted-foreground text-sm">
-                Board meetings are held monthly. Check the calendar for upcoming meeting dates and
-                times.
+                Board meetings are held twice a year. Check the calendar for upcoming meeting dates
+                and times.
               </p>
             </CardContent>
           </Card>

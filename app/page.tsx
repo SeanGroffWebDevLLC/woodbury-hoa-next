@@ -4,13 +4,18 @@ import { NewsGrid } from "@/components/home/NewsGrid";
 import { EventsPreview } from "@/components/home/EventsPreview";
 import { getNewsArticles } from "@/app/lib/use-news-articles";
 import { getUpcomingEvents } from "@/app/lib/get-events";
+import { getMainLogo } from "@/app/lib/get-logos";
 
 export default async function HomePage() {
-  const [articles, events] = await Promise.all([getNewsArticles(3), getUpcomingEvents(2)]);
+  const [articles, events, mainLogo] = await Promise.all([
+    getNewsArticles(3),
+    getUpcomingEvents(2),
+    getMainLogo(),
+  ]);
 
   return (
     <>
-      <Hero />
+      <Hero logo={mainLogo} />
       <QuickActions />
       <NewsGrid articles={articles} />
       <EventsPreview events={events} />

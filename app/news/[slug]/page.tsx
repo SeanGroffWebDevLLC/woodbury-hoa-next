@@ -56,8 +56,8 @@ export default async function NewsArticlePage({ params }: Props) {
     notFound();
   }
 
-  const htmlContent = article.content ? documentToHtmlString(article.content) : "";
-  const categoryName = getStringValue(article.category);
+  const htmlContent = article.body ? documentToHtmlString(article.body) : "";
+  const categoryName = article.categoryTags?.[0] ? getStringValue(article.categoryTags[0]) : null;
   const authorName = getStringValue(article.author);
   const title = typeof article.title === "string" ? article.title : "Untitled";
   const createdAt = typeof article.createdAt === "string" ? article.createdAt : null;

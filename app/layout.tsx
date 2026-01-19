@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { getNavLogo } from "@/app/lib/get-logos";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,15 +18,17 @@ export const metadata: Metadata = {
   description: "Welcome to Woodbury Estates HOA Phase 6 - Together We Thrive",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navLogo = await getNavLogo();
+
   return (
     <html lang="en">
       <body className={`${inter.variable} flex min-h-screen flex-col font-sans antialiased`}>
-        <Header />
+        <Header logo={navLogo} />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

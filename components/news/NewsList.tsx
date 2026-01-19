@@ -11,6 +11,18 @@ interface NewsListProps {
   articles: BlogPostFields[];
 }
 
+function getCategoryName(article: BlogPostFields): string | null {
+  const tag = article.categoryTags?.[0];
+  if (!tag) return null;
+  if (typeof tag === "string") return tag;
+  if (tag && typeof tag === "object" && "fields" in tag) {
+    const fields = tag.fields as Record<string, unknown>;
+    if (fields.name && typeof fields.name === "string") return fields.name;
+    if (fields.title && typeof fields.title === "string") return fields.title;
+  }
+  return null;
+}
+
 export function NewsList({ articles }: NewsListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
@@ -18,8 +30,9 @@ export function NewsList({ articles }: NewsListProps) {
   const categories = useMemo(() => {
     const cats = new Set<string>();
     articles.forEach((article) => {
-      if (article.category) {
-        cats.add(article.category);
+      const categoryName = getCategoryName(article);
+      if (categoryName) {
+        cats.add(categoryName);
       }
     });
     return Array.from(cats);
@@ -29,7 +42,7 @@ export function NewsList({ articles }: NewsListProps) {
     let filtered = articles;
 
     if (categoryFilter) {
-      filtered = filtered.filter((article) => article.category === categoryFilter);
+      filtered = filtered.filter((article) => getCategoryName(article) === categoryFilter);
     }
 
     if (searchQuery) {

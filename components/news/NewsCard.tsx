@@ -22,7 +22,7 @@ function getStringValue(value: unknown): string | null {
 }
 
 export function NewsCard({ article }: NewsCardProps) {
-  const categoryName = getStringValue(article.category);
+  const categoryName = article.categoryTags?.[0] ? getStringValue(article.categoryTags[0]) : null;
   const title = typeof article.title === "string" ? article.title : "Untitled";
   const excerpt = typeof article.excerpt === "string" ? article.excerpt : null;
   const createdAt = typeof article.createdAt === "string" ? article.createdAt : null;

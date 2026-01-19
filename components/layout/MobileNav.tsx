@@ -2,22 +2,28 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import type { LogoData } from "@/app/lib/get-logos";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/news", label: "News" },
   { href: "/documents", label: "Documents" },
   { href: "/calendar", label: "Calendar" },
-  { href: "/contact", label: "Contact" },
   { href: "/dues", label: "Dues & Fees" },
-  { href: "/news", label: "News" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export function MobileNav() {
+interface MobileNavProps {
+  logo: LogoData | null;
+}
+
+export function MobileNav({ logo }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -30,7 +36,25 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="right" className="w-[300px] sm:w-[400px]">
         <SheetHeader>
-          <SheetTitle className="text-hoa-navy text-left">Menu</SheetTitle>
+          <SheetTitle className="text-left">
+            {logo ? (
+              <Image
+                src={logo.url}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="h-10 w-auto"
+              />
+            ) : (
+              <Image
+                src="/woodbury-hoa-6.png"
+                alt="Woodbury Estates HOA Phase 6"
+                width={150}
+                height={40}
+                className="h-10 w-auto"
+              />
+            )}
+          </SheetTitle>
         </SheetHeader>
         <nav className="mt-8 flex flex-col gap-4">
           {navItems.map((item) => (
