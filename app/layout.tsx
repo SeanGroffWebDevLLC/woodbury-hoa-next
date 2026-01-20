@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/sonner";
 import { getNavLogo } from "@/app/lib/get-logos";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default async function RootLayout({
         <Header logo={navLogo} />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );

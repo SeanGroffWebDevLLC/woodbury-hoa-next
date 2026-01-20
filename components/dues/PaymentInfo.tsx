@@ -1,7 +1,10 @@
 import { CreditCard, CheckCircle, AlertTriangle, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { PaymentButton } from "./PaymentButton";
+
+// Annual dues amount (in cents)
+const ANNUAL_DUES = 40000; // $400.00
 
 export function PaymentInfo() {
   return (
@@ -24,7 +27,7 @@ export function PaymentInfo() {
               <div>
                 <p className="font-medium">Online Payment Portal</p>
                 <p className="text-muted-foreground text-sm">
-                  Pay securely online using credit card or bank transfer (coming soon)
+                  Pay securely online using credit card. Processing fees apply.
                 </p>
               </div>
             </div>
@@ -51,10 +54,12 @@ export function PaymentInfo() {
             </div>
           </div>
 
-          <Button className="mt-4" disabled>
-            <CreditCard className="mr-2 h-4 w-4" />
-            Online Payment (Coming Soon)
-          </Button>
+          <PaymentButton
+            amount={ANNUAL_DUES}
+            feeTitle="Annual HOA Dues"
+            description="Woodbury Estates HOA Phase 6 - Annual Dues Payment"
+            className="mt-4 bg-hoa-blue hover:bg-hoa-blue/90"
+          />
         </CardContent>
       </Card>
 
@@ -67,16 +72,16 @@ export function PaymentInfo() {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex justify-between border-b pb-2">
-            <span className="text-muted-foreground">Quarterly Dues Due</span>
-            <span className="font-medium">1st of Jan, Apr, Jul, Oct</span>
+            <span className="text-muted-foreground">Annual Dues Due</span>
+            <span className="font-medium">January 1st</span>
           </div>
           <div className="flex justify-between border-b pb-2">
             <span className="text-muted-foreground">Grace Period</span>
-            <span className="font-medium">15 days</span>
+            <span className="font-medium">30 days</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Late Fee Applied After</span>
-            <span className="font-medium">16th of the month</span>
+            <span className="font-medium">January 31st</span>
           </div>
         </CardContent>
       </Card>

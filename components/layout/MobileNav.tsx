@@ -8,7 +8,11 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { PaymentButton } from "@/components/dues/PaymentButton";
 import type { LogoData } from "@/app/lib/get-logos";
+
+// Annual dues amount (in cents)
+const ANNUAL_DUES = 40000; // $400.00
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -57,7 +61,7 @@ export function MobileNav({ logo }: MobileNavProps) {
             )}
           </SheetTitle>
         </SheetHeader>
-        <nav className="mt-8 flex flex-col gap-4">
+        <nav className="mt-8 flex flex-1 flex-col gap-4">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -73,6 +77,14 @@ export function MobileNav({ logo }: MobileNavProps) {
               {item.label}
             </Link>
           ))}
+          <div className="mt-auto pt-4">
+            <PaymentButton
+              amount={ANNUAL_DUES}
+              feeTitle="Annual HOA Dues"
+              description="Woodbury Estates HOA Phase 6 - Annual Dues Payment"
+              className="bg-hoa-blue hover:bg-hoa-blue/90 w-full"
+            />
+          </div>
         </nav>
       </SheetContent>
     </Sheet>
