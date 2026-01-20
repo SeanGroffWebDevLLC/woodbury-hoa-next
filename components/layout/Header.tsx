@@ -12,6 +12,7 @@ const navItems = [
   { href: "/news", label: "News" },
   { href: "/documents", label: "Documents" },
   { href: "/calendar", label: "Calendar" },
+  { href: "/board", label: "Board" },
   { href: "/dues", label: "Dues & Fees" },
   { href: "/contact", label: "Contact" },
 ];

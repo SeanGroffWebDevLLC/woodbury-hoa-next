@@ -5,6 +5,7 @@ export async function getBoardMembers(): Promise<BoardMemberFields[]> {
   try {
     const res = await contentfulClient.getEntries<BoardMemberSkeleton>({
       content_type: "boardMember",
+      include: 2,
     });
 
     if (!res.items.length) {

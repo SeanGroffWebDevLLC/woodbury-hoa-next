@@ -70,10 +70,10 @@ export type ExternalLinkEntry = Entry<ExternalLinkSkeleton>;
 
 // Board Member
 export interface BoardMemberFields {
+  photo: Asset;
   name: string;
   position: string;
-  email: string;
-  phone?: string;
+  bio?: string;
   displayOrder: number;
 }
 
