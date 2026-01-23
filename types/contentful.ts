@@ -129,6 +129,25 @@ export interface MainLogoSkeleton extends EntrySkeletonType {
 
 export type MainLogoEntry = Entry<MainLogoSkeleton>;
 
+// Payment Configuration (Stripe fee rates)
+export interface PaymentConfigurationFields {
+  title: string;
+  cardFeePercentage: number;
+  cardFeeFixed: number; // in cents
+  achFeePercentage: number;
+  achFeeCap: number; // in cents
+}
+
+export interface PaymentConfigurationSkeleton extends EntrySkeletonType {
+  contentTypeId: "paymentConfiguration";
+  fields: PaymentConfigurationFields;
+}
+
+export type PaymentConfigurationEntry = Entry<PaymentConfigurationSkeleton>;
+
+// Payment method type
+export type PaymentMethod = "card" | "us_bank_account";
+
 // Helper type for document categories
 export const DOCUMENT_CATEGORIES = {
   bylaws: "Bylaws & CCRs",

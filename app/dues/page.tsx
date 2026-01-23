@@ -28,7 +28,7 @@ export default async function DuesPage() {
 
         <div>
           <h2 className="text-hoa-navy mb-4 text-xl font-semibold">Payment Information</h2>
-          <PaymentInfo />
+          <PaymentInfo annualDues={fees[0] || null} />
         </div>
       </div>
     </div>

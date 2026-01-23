@@ -35,7 +35,10 @@ export function Footer() {
             <div className="space-y-2 text-sm text-gray-300">
               <div className="flex items-center gap-2">
                 <Mail className="text-hoa-blue h-4 w-4" />
-                <a href="mailto:woodburyestateshoa.phase6@gmail.com" className="hover:text-hoa-blue">
+                <a
+                  href="mailto:woodburyestateshoa.phase6@gmail.com"
+                  className="hover:text-hoa-blue"
+                >
                   woodburyestateshoa.phase6@gmail.com
                 </a>
               </div>

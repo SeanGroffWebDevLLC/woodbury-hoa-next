@@ -9,21 +9,14 @@ interface BoardMemberCardProps {
 }
 
 export function BoardMemberCard({ member }: BoardMemberCardProps) {
-  const photoUrl = member.photo?.fields?.file?.url
-    ? `https:${member.photo.fields.file.url}`
-    : null;
+  const photoUrl = member.photo?.fields?.file?.url ? `https:${member.photo.fields.file.url}` : null;
 
   return (
     <Card>
       <CardContent className="flex items-center gap-4 p-6">
         {photoUrl ? (
           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
-            <Image
-              src={photoUrl}
-              alt={member.name}
-              fill
-              className="object-cover"
-            />
+            <Image src={photoUrl} alt={member.name} fill className="object-cover" />
           </div>
         ) : (
           <Avatar className="bg-hoa-navy h-16 w-16 text-white">

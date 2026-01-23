@@ -53,7 +53,10 @@ export default async function ContactPage() {
             <CardContent className="space-y-4">
               <div>
                 <p className="text-muted-foreground text-sm font-medium">Email</p>
-                <a href="mailto:woodburyestateshoa.phase6@gmail.com" className="text-hoa-blue hover:underline">
+                <a
+                  href="mailto:woodburyestateshoa.phase6@gmail.com"
+                  className="text-hoa-blue hover:underline"
+                >
                   woodburyestateshoa.phase6@gmail.com
                 </a>
               </div>

@@ -15,9 +15,7 @@ interface PaymentSuccessPageProps {
   searchParams: Promise<{ session_id?: string }>;
 }
 
-export default async function PaymentSuccessPage({
-  searchParams,
-}: PaymentSuccessPageProps) {
+export default async function PaymentSuccessPage({ searchParams }: PaymentSuccessPageProps) {
   const { session_id } = await searchParams;
   let paymentDetails = null;
 
@@ -28,9 +26,7 @@ export default async function PaymentSuccessPage({
         amount: session.amount_total,
         email: session.customer_details?.email,
         feeTitle: session.metadata?.feeTitle || "HOA Dues",
-        baseAmount: session.metadata?.baseAmount
-          ? parseInt(session.metadata.baseAmount)
-          : null,
+        baseAmount: session.metadata?.baseAmount ? parseInt(session.metadata.baseAmount) : null,
         processingFee: session.metadata?.processingFee
           ? parseInt(session.metadata.processingFee)
           : null,
@@ -49,14 +45,11 @@ export default async function PaymentSuccessPage({
               <CheckCircle className="h-12 w-12 text-green-600" />
             </div>
           </div>
-          <CardTitle className="text-hoa-navy text-2xl">
-            Payment Successful!
-          </CardTitle>
+          <CardTitle className="text-hoa-navy text-2xl">Payment Successful!</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <p className="text-muted-foreground text-center">
-            Thank you for your payment. Your HOA dues have been processed
-            successfully.
+            Thank you for your payment. Your HOA dues have been processed successfully.
           </p>
 
           {paymentDetails && (
@@ -68,17 +61,13 @@ export default async function PaymentSuccessPage({
               {paymentDetails.baseAmount && (
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Base Amount</span>
-                  <span className="font-medium">
-                    {formatCents(paymentDetails.baseAmount)}
-                  </span>
+                  <span className="font-medium">{formatCents(paymentDetails.baseAmount)}</span>
                 </div>
               )}
               {paymentDetails.processingFee && (
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Processing Fee</span>
-                  <span className="font-medium">
-                    {formatCents(paymentDetails.processingFee)}
-                  </span>
+                  <span className="font-medium">{formatCents(paymentDetails.processingFee)}</span>
                 </div>
               )}
               {paymentDetails.amount && (

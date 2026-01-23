@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { PaymentButton } from "@/components/dues/PaymentButton";
+import { PaymentMethodSelector } from "@/components/dues/PaymentMethodSelector";
 import type { LogoData } from "@/app/lib/get-logos";
 
 // Annual dues amount (in cents)
@@ -78,7 +78,7 @@ export function MobileNav({ logo }: MobileNavProps) {
             </Link>
           ))}
           <div className="mt-auto pt-4">
-            <PaymentButton
+            <PaymentMethodSelector
               amount={ANNUAL_DUES}
               feeTitle="Annual HOA Dues"
               description="Woodbury Estates HOA Phase 6 - Annual Dues Payment"

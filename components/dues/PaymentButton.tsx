@@ -50,8 +50,7 @@ export function PaymentButton({
         throw new Error("No checkout URL received");
       }
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An unexpected error occurred";
+      const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred";
       toast.error("Payment Error", {
         description: errorMessage,
       });
@@ -60,11 +59,7 @@ export function PaymentButton({
   };
 
   return (
-    <Button
-      onClick={handlePayment}
-      disabled={isLoading || disabled}
-      className={className}
-    >
+    <Button onClick={handlePayment} disabled={isLoading || disabled} className={className}>
       {isLoading ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />

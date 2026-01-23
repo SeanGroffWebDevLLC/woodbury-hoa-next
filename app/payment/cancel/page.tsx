@@ -19,15 +19,12 @@ export default function PaymentCancelPage() {
               <XCircle className="h-12 w-12 text-amber-600" />
             </div>
           </div>
-          <CardTitle className="text-hoa-navy text-2xl">
-            Payment Cancelled
-          </CardTitle>
+          <CardTitle className="text-hoa-navy text-2xl">Payment Cancelled</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <p className="text-muted-foreground text-center">
-            Your payment was cancelled and you have not been charged. If you
-            encountered any issues or have questions, please contact the HOA
-            office.
+            Your payment was cancelled and you have not been charged. If you encountered any issues
+            or have questions, please contact the HOA office.
           </p>
 
           <div className="flex flex-col gap-3">

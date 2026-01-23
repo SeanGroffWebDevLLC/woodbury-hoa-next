@@ -47,11 +47,11 @@ The website uses webhooks to receive payment notifications from Stripe.
 
 The following environment variables must be set in the hosting environment (Vercel, etc.):
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `STRIPE_SECRET_KEY` | Stripe secret API key | `sk_live_xxx...` |
-| `STRIPE_WEBHOOK_SECRET` | Webhook signing secret | `whsec_xxx...` |
-| `NEXT_PUBLIC_APP_URL` | Production website URL | `https://woodburyestates.org` |
+| Variable                | Description            | Example                       |
+| ----------------------- | ---------------------- | ----------------------------- |
+| `STRIPE_SECRET_KEY`     | Stripe secret API key  | `sk_live_xxx...`              |
+| `STRIPE_WEBHOOK_SECRET` | Webhook signing secret | `whsec_xxx...`                |
+| `NEXT_PUBLIC_APP_URL`   | Production website URL | `https://woodburyestates.org` |
 
 ### Step 5: Test the Integration
 

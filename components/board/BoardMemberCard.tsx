@@ -7,16 +7,14 @@ interface BoardMemberCardProps {
 }
 
 export function BoardMemberCard({ member }: BoardMemberCardProps) {
-  const photoUrl = member.photo?.fields?.file?.url
-    ? `https:${member.photo.fields.file.url}`
-    : null;
+  const photoUrl = member.photo?.fields?.file?.url ? `https:${member.photo.fields.file.url}` : null;
   const photoDetails = member.photo?.fields?.file?.details as
     | { image?: { width: number; height: number } }
     | undefined;
 
   return (
     <Card className="overflow-hidden">
-      <div className="bg-muted aspect-square relative">
+      <div className="bg-muted relative aspect-square">
         {photoUrl ? (
           <Image
             src={photoUrl}
@@ -40,9 +38,7 @@ export function BoardMemberCard({ member }: BoardMemberCardProps) {
       <CardContent className="p-6">
         <h3 className="text-xl font-semibold">{member.name}</h3>
         <p className="text-primary mb-3 font-medium">{member.position}</p>
-        {member.bio && (
-          <p className="text-muted-foreground text-sm">{member.bio}</p>
-        )}
+        {member.bio && <p className="text-muted-foreground text-sm">{member.bio}</p>}
       </CardContent>
     </Card>
   );

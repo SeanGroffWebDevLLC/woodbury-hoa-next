@@ -85,12 +85,12 @@ Copy this `whsec_` value to your `.env.local` as `STRIPE_WEBHOOK_SECRET`.
 
 Use these test card numbers in Stripe Checkout:
 
-| Scenario | Card Number | CVC | Expiry |
-|----------|-------------|-----|--------|
-| **Successful payment** | `4242 4242 4242 4242` | Any 3 digits | Any future date |
+| Scenario                    | Card Number           | CVC          | Expiry          |
+| --------------------------- | --------------------- | ------------ | --------------- |
+| **Successful payment**      | `4242 4242 4242 4242` | Any 3 digits | Any future date |
 | **Requires authentication** | `4000 0025 0000 3155` | Any 3 digits | Any future date |
-| **Declined** | `4000 0000 0000 0002` | Any 3 digits | Any future date |
-| **Insufficient funds** | `4000 0000 0000 9995` | Any 3 digits | Any future date |
+| **Declined**                | `4000 0000 0000 0002` | Any 3 digits | Any future date |
+| **Insufficient funds**      | `4000 0000 0000 9995` | Any 3 digits | Any future date |
 
 Full list: [Stripe Testing Documentation](https://docs.stripe.com/testing)
 
@@ -99,11 +99,13 @@ Full list: [Stripe Testing Documentation](https://docs.stripe.com/testing)
 ## 5. Testing the Payment Flow
 
 1. Start the dev server:
+
    ```bash
    pnpm dev
    ```
 
 2. In a separate terminal, start webhook forwarding:
+
    ```bash
    stripe listen --forward-to localhost:3000/api/stripe/webhook
    ```
@@ -136,21 +138,21 @@ With test mode enabled, you can view:
 
 The webhook handler at `/api/stripe/webhook` processes these events:
 
-| Event | Description |
-|-------|-------------|
-| `checkout.session.completed` | Customer completed checkout successfully |
-| `payment_intent.succeeded` | Payment was successful |
-| `payment_intent.payment_failed` | Payment failed |
+| Event                           | Description                              |
+| ------------------------------- | ---------------------------------------- |
+| `checkout.session.completed`    | Customer completed checkout successfully |
+| `payment_intent.succeeded`      | Payment was successful                   |
+| `payment_intent.payment_failed` | Payment failed                           |
 
 ---
 
 ## 8. Environment Variable Summary
 
-| Variable | Dev Value | Description |
-|----------|-----------|-------------|
-| `STRIPE_SECRET_KEY` | `sk_test_...` | Test secret key from Stripe Dashboard |
-| `STRIPE_WEBHOOK_SECRET` | `whsec_...` | From `stripe listen` CLI output |
-| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | Local dev server URL |
+| Variable                | Dev Value               | Description                           |
+| ----------------------- | ----------------------- | ------------------------------------- |
+| `STRIPE_SECRET_KEY`     | `sk_test_...`           | Test secret key from Stripe Dashboard |
+| `STRIPE_WEBHOOK_SECRET` | `whsec_...`             | From `stripe listen` CLI output       |
+| `NEXT_PUBLIC_APP_URL`   | `http://localhost:3000` | Local dev server URL                  |
 
 ---
 

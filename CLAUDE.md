@@ -34,6 +34,7 @@ This is a Next.js 16 App Router application for the Woodbury Estates HOA Phase 6
 ### Contentful Content Types
 
 Defined in `types/contentful.ts`:
+
 - `blogPost` - News articles with rich text body
 - `event` - Calendar events with types: meeting, social, maintenance, deadline
 - `document` - HOA documents (bylaws, financials, meeting-minutes, forms)
@@ -46,6 +47,7 @@ Defined in `types/contentful.ts`:
 ### Environment Variables
 
 Required in `.env`:
+
 - `CONTENTFUL_SPACE_ID`
 - `CONTENTFUL_DELIVERY_TOKEN` (production)
 - `CONTENTFUL_PREVIEW_TOKEN` (development)

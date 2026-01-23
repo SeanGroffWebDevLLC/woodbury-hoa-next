@@ -16,8 +16,7 @@ const STRIPE_FIXED_FEE = 0.3; // $0.30
  */
 export function calculateProcessingFee(baseAmountInCents: number): number {
   const baseAmountDollars = baseAmountInCents / 100;
-  const totalToCharge =
-    (baseAmountDollars + STRIPE_FIXED_FEE) / (1 - STRIPE_PERCENTAGE_FEE);
+  const totalToCharge = (baseAmountDollars + STRIPE_FIXED_FEE) / (1 - STRIPE_PERCENTAGE_FEE);
   const processingFee = totalToCharge - baseAmountDollars;
   // Round to nearest cent
   return Math.round(processingFee * 100);

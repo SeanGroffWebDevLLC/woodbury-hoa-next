@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./MobileNav";
-import { PaymentButton } from "@/components/dues/PaymentButton";
+import { PaymentMethodSelector } from "@/components/dues/PaymentMethodSelector";
 import type { LogoData } from "@/app/lib/get-logos";
 
 // Annual dues amount (in cents)
@@ -66,7 +66,7 @@ export function Header({ logo }: HeaderProps) {
               {item.label}
             </Link>
           ))}
-          <PaymentButton
+          <PaymentMethodSelector
             amount={ANNUAL_DUES}
             feeTitle="Annual HOA Dues"
             description="Woodbury Estates HOA Phase 6 - Annual Dues Payment"

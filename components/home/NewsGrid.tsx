@@ -46,7 +46,9 @@ export function NewsGrid({ articles }: NewsGridProps) {
         </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => {
-            const categoryName = article.categoryTags?.[0] ? getStringValue(article.categoryTags[0]) : null;
+            const categoryName = article.categoryTags?.[0]
+              ? getStringValue(article.categoryTags[0])
+              : null;
             const title = typeof article.title === "string" ? article.title : "Untitled";
             const excerpt = typeof article.excerpt === "string" ? article.excerpt : null;
             const createdAt = typeof article.createdAt === "string" ? article.createdAt : null;
