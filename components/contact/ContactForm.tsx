@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, CheckCircle, Lightbulb, Mail, Send } from "lucide-react";
+import { AlertCircle, CheckCircle, Lightbulb, Mail, Send, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,9 +16,9 @@ interface FormData {
   inquiryType: InquiryType;
   name: string;
   email: string;
-  phone: string;
   subject: string;
   message: string;
+  honeypot: string;
 }
 
 const inquiryTypes = [
@@ -27,18 +27,25 @@ const inquiryTypes = [
   { value: "suggestion" as InquiryType, label: "Submit a Suggestion", icon: Lightbulb },
 ];
 
+const defaultSubjects: Record<InquiryType, string> = {
+  general: "General Inquiry",
+  complaint: "Complaint",
+  suggestion: "Suggestion",
+};
+
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     inquiryType: "general",
     name: "",
     email: "",
-    phone: "",
-    subject: "",
+    subject: defaultSubjects.general,
     message: "",
+    honeypot: "",
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
@@ -71,18 +78,57 @@ export function ContactForm() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          setSubmitError("Too many requests. Please wait a moment and try again.");
+        } else if (data.error) {
+          setSubmitError(data.error);
+        } else {
+          setSubmitError("Failed to send message. Please try again.");
+        }
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setSubmitError("Failed to send message. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+
+      // Auto-fill subject when inquiry type changes (if subject is empty or a default value)
+      if (field === "inquiryType") {
+        const isDefaultSubject = Object.values(defaultSubjects).includes(prev.subject);
+        if (!prev.subject.trim() || isDefaultSubject) {
+          updated.subject = defaultSubjects[value as InquiryType];
+        }
+      }
+
+      return updated;
+    });
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+    if (submitError) {
+      setSubmitError(null);
     }
   };
 
@@ -111,6 +157,26 @@ export function ContactForm() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
+          {submitError && (
+            <Alert variant="destructive">
+              <XCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{submitError}</AlertDescription>
+            </Alert>
+          )}
+
+          {/* Honeypot field - hidden from users, catches bots */}
+          <input
+            type="text"
+            name="website"
+            value={formData.honeypot}
+            onChange={(e) => handleChange("honeypot", e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-2499.75 h-0 w-0 overflow-hidden opacity-0"
+          />
+
           <div className="space-y-3">
             <Label>What type of inquiry is this?</Label>
             <RadioGroup
@@ -166,16 +232,6 @@ export function ContactForm() {
               />
               {errors.email && <p className="text-destructive text-sm">{errors.email}</p>}
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone (optional)</Label>
-            <Input
-              id="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-            />
           </div>
 
           <div className="space-y-2">
