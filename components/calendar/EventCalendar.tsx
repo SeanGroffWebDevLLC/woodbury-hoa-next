@@ -61,13 +61,6 @@ export function EventCalendar({ events }: EventCalendarProps) {
           modifiers={{
             hasEvent: eventDates,
           }}
-          modifiersStyles={{
-            hasEvent: {
-              fontWeight: "bold",
-              backgroundColor: "hsl(var(--hoa-blue) / 0.2)",
-              borderRadius: "100%",
-            },
-          }}
           className="rounded-md border"
         />
 
