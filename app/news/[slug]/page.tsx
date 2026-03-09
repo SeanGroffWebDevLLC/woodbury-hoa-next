@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";

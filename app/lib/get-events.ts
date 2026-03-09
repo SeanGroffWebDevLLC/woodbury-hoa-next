@@ -1,7 +1,8 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { EventSkeleton, EventFields, EventType, EVENT_TYPES } from "@/types/contentful";
 
-export async function getEvents(): Promise<EventFields[]> {
+async function getEventsUncached(): Promise<EventFields[]> {
   try {
     const res = await contentfulClient.getEntries<EventSkeleton>({
       content_type: "event",
@@ -19,6 +20,11 @@ export async function getEvents(): Promise<EventFields[]> {
     return [];
   }
 }
+
+export const getEvents = unstable_cache(getEventsUncached, ["events-data"], {
+  revalidate: 86400,
+  tags: ["events"],
+});
 
 export async function getUpcomingEvents(limit?: number): Promise<EventFields[]> {
   const allEvents = await getEvents();

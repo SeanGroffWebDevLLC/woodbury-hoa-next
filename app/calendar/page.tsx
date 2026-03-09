@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { EventCalendar } from "@/components/calendar/EventCalendar";
 import { getEvents } from "@/app/lib/get-events";
 

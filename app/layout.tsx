@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";

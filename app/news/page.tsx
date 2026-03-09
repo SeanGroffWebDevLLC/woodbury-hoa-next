@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { NewsList } from "@/components/news/NewsList";
 import { getNewsArticles } from "@/app/lib/use-news-articles";
 

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { Mail, MapPin, Users } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { BoardMemberCard } from "@/components/contact/BoardMemberCard";

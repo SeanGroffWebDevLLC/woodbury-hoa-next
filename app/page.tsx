@@ -1,3 +1,5 @@
+export const revalidate = 86400;
+
 import { Hero } from "@/components/home/Hero";
 import { QuickActions } from "@/components/home/QuickActions";
 import { NewsGrid } from "@/components/home/NewsGrid";

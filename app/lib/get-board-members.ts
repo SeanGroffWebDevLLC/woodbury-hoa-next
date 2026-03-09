@@ -1,7 +1,8 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { BoardMemberSkeleton, BoardMemberFields } from "@/types/contentful";
 
-export async function getBoardMembers(): Promise<BoardMemberFields[]> {
+async function getBoardMembersUncached(): Promise<BoardMemberFields[]> {
   try {
     const res = await contentfulClient.getEntries<BoardMemberSkeleton>({
       content_type: "boardMember",
@@ -20,3 +21,8 @@ export async function getBoardMembers(): Promise<BoardMemberFields[]> {
     return [];
   }
 }
+
+export const getBoardMembers = unstable_cache(getBoardMembersUncached, ["board-data"], {
+  revalidate: 86400,
+  tags: ["board"],
+});

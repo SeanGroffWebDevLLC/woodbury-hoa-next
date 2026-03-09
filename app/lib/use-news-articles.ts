@@ -1,7 +1,8 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { BlogPostSkeleton, BlogPostFields } from "@/types/contentful";
 
-export async function getNewsArticles(limit?: number): Promise<BlogPostFields[]> {
+async function getNewsArticlesUncached(limit?: number): Promise<BlogPostFields[]> {
   try {
     const res = await contentfulClient.getEntries<BlogPostSkeleton>({
       content_type: "blogPost",
@@ -24,6 +25,11 @@ export async function getNewsArticles(limit?: number): Promise<BlogPostFields[]>
     return [];
   }
 }
+
+export const getNewsArticles = unstable_cache(getNewsArticlesUncached, ["news-data"], {
+  revalidate: 86400,
+  tags: ["news"],
+});
 
 export async function getNewsArticleBySlug(slug: string): Promise<BlogPostFields | null> {
   const allArticles = await getNewsArticles();

@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { MainLogoSkeleton, MainLogoFields } from "@/types/contentful";
 import type { Entry } from "contentful";
@@ -9,7 +10,7 @@ export interface LogoData {
   alt: string;
 }
 
-async function getLogoByName(name: string): Promise<LogoData | null> {
+async function getLogoByNameUncached(name: string): Promise<LogoData | null> {
   try {
     const res = await contentfulClient.getEntries<MainLogoSkeleton>({
       content_type: "mainLogo",
@@ -57,10 +58,15 @@ async function getLogoByName(name: string): Promise<LogoData | null> {
   }
 }
 
+const getLogoByNameCached = unstable_cache(getLogoByNameUncached, ["logo-data"], {
+  revalidate: 86400,
+  tags: ["logos"],
+});
+
 export async function getMainLogo(): Promise<LogoData | null> {
-  return getLogoByName("main");
+  return getLogoByNameCached("main");
 }
 
 export async function getNavLogo(): Promise<LogoData | null> {
-  return getLogoByName("nav");
+  return getLogoByNameCached("nav");
 }

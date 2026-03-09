@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type {
   PaymentConfigurationSkeleton,
@@ -14,7 +15,7 @@ const DEFAULT_CONFIG: PaymentConfigurationFields = {
   achFeeCap: 500, // cents ($5.00)
 };
 
-export async function getPaymentConfiguration(): Promise<PaymentConfigurationFields> {
+async function getPaymentConfigurationUncached(): Promise<PaymentConfigurationFields> {
   try {
     const res = await contentfulClient.getEntries<PaymentConfigurationSkeleton>({
       content_type: "paymentConfiguration",
@@ -32,6 +33,12 @@ export async function getPaymentConfiguration(): Promise<PaymentConfigurationFie
     return DEFAULT_CONFIG;
   }
 }
+
+export const getPaymentConfiguration = unstable_cache(
+  getPaymentConfigurationUncached,
+  ["payment-config"],
+  { revalidate: 86400, tags: ["payment"] }
+);
 
 /**
  * Calculate the processing fee for a given amount and payment method

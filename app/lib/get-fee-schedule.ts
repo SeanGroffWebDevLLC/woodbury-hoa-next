@@ -1,7 +1,8 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { FeeScheduleSkeleton, FeeScheduleFields } from "@/types/contentful";
 
-export async function getFeeSchedule(): Promise<FeeScheduleFields[]> {
+async function getFeeScheduleUncached(): Promise<FeeScheduleFields[]> {
   try {
     const res = await contentfulClient.getEntries<FeeScheduleSkeleton>({
       content_type: "feeSchedule",
@@ -19,6 +20,11 @@ export async function getFeeSchedule(): Promise<FeeScheduleFields[]> {
     return [];
   }
 }
+
+export const getFeeSchedule = unstable_cache(getFeeScheduleUncached, ["fees-data"], {
+  revalidate: 86400,
+  tags: ["fees"],
+});
 
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-US", {

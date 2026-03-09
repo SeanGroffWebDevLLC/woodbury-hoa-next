@@ -1,7 +1,8 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type { ExternalLinkSkeleton, ExternalLinkFields } from "@/types/contentful";
 
-export async function getExternalLinks(): Promise<ExternalLinkFields[]> {
+async function getExternalLinksUncached(): Promise<ExternalLinkFields[]> {
   try {
     const res = await contentfulClient.getEntries<ExternalLinkSkeleton>({
       content_type: "externalLink",
@@ -19,6 +20,11 @@ export async function getExternalLinks(): Promise<ExternalLinkFields[]> {
     return [];
   }
 }
+
+export const getExternalLinks = unstable_cache(getExternalLinksUncached, ["links-data"], {
+  revalidate: 86400,
+  tags: ["links"],
+});
 
 export async function getExternalLinksByCategory(
   category: "emergency" | "government" | "utilities"

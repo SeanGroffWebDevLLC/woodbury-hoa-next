@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { contentfulClient } from "./contentful";
 import type {
   DocumentSkeleton,
@@ -6,7 +7,7 @@ import type {
   DOCUMENT_CATEGORIES,
 } from "@/types/contentful";
 
-export async function getDocuments(): Promise<DocumentFields[]> {
+async function getDocumentsUncached(): Promise<DocumentFields[]> {
   try {
     const res = await contentfulClient.getEntries<DocumentSkeleton>({
       content_type: "document",
@@ -25,6 +26,11 @@ export async function getDocuments(): Promise<DocumentFields[]> {
     return [];
   }
 }
+
+export const getDocuments = unstable_cache(getDocumentsUncached, ["documents-data"], {
+  revalidate: 86400,
+  tags: ["documents"],
+});
 
 export async function getDocumentsByCategory(
   category: DocumentCategory

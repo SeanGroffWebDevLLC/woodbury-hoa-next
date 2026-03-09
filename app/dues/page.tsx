@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { FeeSchedule } from "@/components/dues/FeeSchedule";
 import { PaymentInfo } from "@/components/dues/PaymentInfo";
 import { getFeeSchedule } from "@/app/lib/get-fee-schedule";

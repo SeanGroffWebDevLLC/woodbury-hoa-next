@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+export const revalidate = 86400;
+
 import { DocumentAccordion } from "@/components/documents/DocumentAccordion";
 import { getDocumentsGroupedByCategory } from "@/app/lib/get-documents";
 
