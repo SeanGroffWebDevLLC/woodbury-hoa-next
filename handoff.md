@@ -43,15 +43,15 @@ The website is hosted on Vercel under your developer's account at no cost.
 
 Your developer will configure the following secret keys. You will need to provide the keys from Stripe (Section 4) and Resend (Section 3) once those accounts are set up.
 
-| Variable                    | Description                        | Where to get it     |
-| --------------------------- | ---------------------------------- | ------------------- |
-| `STRIPE_SECRET_KEY`         | Stripe secret API key              | Stripe Dashboard    |
-| `STRIPE_WEBHOOK_SECRET`     | Stripe webhook signing secret      | Stripe Dashboard    |
-| `NEXT_PUBLIC_STRIPE_KEY`    | Stripe publishable key             | Stripe Dashboard    |
-| `NEXT_PUBLIC_APP_URL`       | Your production website URL        | Your domain         |
-| `RESEND_API_KEY`            | Resend email API key               | Resend Dashboard    |
-| `CONTENTFUL_SPACE_ID`       | Contentful space identifier        | Contentful Settings |
-| `CONTENTFUL_DELIVERY_TOKEN` | Contentful content delivery token  | Contentful Settings |
+| Variable                    | Description                       | Where to get it     |
+| --------------------------- | --------------------------------- | ------------------- |
+| `STRIPE_SECRET_KEY`         | Stripe secret API key             | Stripe Dashboard    |
+| `STRIPE_WEBHOOK_SECRET`     | Stripe webhook signing secret     | Stripe Dashboard    |
+| `NEXT_PUBLIC_STRIPE_KEY`    | Stripe publishable key            | Stripe Dashboard    |
+| `NEXT_PUBLIC_APP_URL`       | Your production website URL       | Your domain         |
+| `RESEND_API_KEY`            | Resend email API key              | Resend Dashboard    |
+| `CONTENTFUL_SPACE_ID`       | Contentful space identifier       | Contentful Settings |
+| `CONTENTFUL_DELIVERY_TOKEN` | Contentful content delivery token | Contentful Settings |
 
 ### Vercel Billing Notes
 
@@ -232,15 +232,15 @@ Your developer will manage the technical operation of the website on your behalf
 
 ### Monthly/Annual Costs Summary
 
-| Service    | Plan     | Cost              | Billed To    |
-| ---------- | -------- | ----------------- | ------------ |
-| Service    | Plan     | Cost              | Account Owner       |
-| ---------- | -------- | ----------------- | ------------------- |
-| Vercel     | Hobby    | Free              | Developer (managed) |
-| Resend     | Free     | Free              | HOA                 |
-| Stripe     | Standard | 2.9% + $0.30/txn  | HOA                 |
-| Contentful | Free     | Free              | Developer (managed) |
-| Domain     | Annual   | ~$15–20/year      | Developer (HOA pays)|
+| Service    | Plan     | Cost              | Billed To            |
+| ---------- | -------- | ----------------- | -------------------- |
+| Service    | Plan     | Cost              | Account Owner        |
+| ---------- | -------- | ----------------- | -------------------  |
+| Vercel     | Hobby    | Free              | Developer (managed)  |
+| Resend     | Free     | Free              | HOA                  |
+| Stripe     | Standard | 2.9% + $0.30/txn  | HOA                  |
+| Contentful | Free     | Free              | Developer (managed)  |
+| Domain     | Annual   | ~$15–20/year      | Developer (HOA pays) |
 
 > Vercel hosting, the domain, and Contentful are managed by your developer. Stripe and Resend accounts are owned directly by the HOA.
 
@@ -269,3 +269,7 @@ Use this checklist on the day of handoff:
 - [ ] Website live on custom domain
 - [ ] Training session completed
 - [ ] Ongoing support agreement signed
+
+## Follow Up Notes
+
+- Update Domain billing info to HOA card once sorted by Christine []

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CreditCard, Building2, Loader2, CheckCircle2 } from "lucide-react";
+import { CreditCard, Building2, Loader2, CheckCircle2, Home } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -56,6 +58,8 @@ export function PaymentMethodSelector({
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentConfig, setPaymentConfig] = useState<PaymentConfig | null>(null);
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
+  const [propertyAddress, setPropertyAddress] = useState("");
+  const [addressError, setAddressError] = useState("");
 
   // Fetch payment config when dialog opens
   useEffect(() => {
@@ -81,6 +85,11 @@ export function PaymentMethodSelector({
   const handlePayment = async () => {
     if (!selectedMethod || !paymentConfig) return;
 
+    if (!propertyAddress.trim()) {
+      setAddressError("Please enter your property address");
+      return;
+    }
+
     setIsProcessing(true);
 
     try {
@@ -98,6 +107,7 @@ export function PaymentMethodSelector({
           paymentMethod: selectedMethod,
           processingFee: breakdown.processingFee,
           totalAmount: breakdown.total,
+          propertyAddress: propertyAddress.trim(),
         }),
       });
 
@@ -258,6 +268,31 @@ export function PaymentMethodSelector({
                 </div>
               )}
             </button>
+
+            {/* Property Address */}
+            <div className="space-y-1.5">
+              <Label
+                htmlFor="property-address"
+                className="flex items-center gap-1.5 text-sm font-medium"
+              >
+                <Home className="h-4 w-4" />
+                Property Address <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="property-address"
+                placeholder="e.g., 123 Oak Lane"
+                value={propertyAddress}
+                onChange={(e) => {
+                  setPropertyAddress(e.target.value);
+                  if (addressError) setAddressError("");
+                }}
+                className={addressError ? "border-destructive" : ""}
+              />
+              {addressError && <p className="text-destructive text-xs">{addressError}</p>}
+              <p className="text-muted-foreground text-xs">
+                Enter your Woodbury Estates home address to record your payment.
+              </p>
+            </div>
 
             {/* Continue Button */}
             <Button

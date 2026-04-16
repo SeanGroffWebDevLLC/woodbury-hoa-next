@@ -30,6 +30,7 @@ export default async function PaymentSuccessPage({ searchParams }: PaymentSucces
         processingFee: session.metadata?.processingFee
           ? parseInt(session.metadata.processingFee)
           : null,
+        propertyAddress: session.metadata?.propertyAddress || null,
       };
     } catch {
       console.error("Failed to retrieve session details");
@@ -76,6 +77,12 @@ export default async function PaymentSuccessPage({ searchParams }: PaymentSucces
                   <span className="text-hoa-blue font-bold">
                     {formatCents(paymentDetails.amount)}
                   </span>
+                </div>
+              )}
+              {paymentDetails.propertyAddress && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Property Address</span>
+                  <span className="font-medium">{paymentDetails.propertyAddress}</span>
                 </div>
               )}
               {paymentDetails.email && (
