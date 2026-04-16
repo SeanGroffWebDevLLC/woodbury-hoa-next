@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Total amount is required" }, { status: 400 });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:4600";
     const formattedBase = formatCents(amount);
     const formattedFee = formatCents(processingFee || 0);
     const formattedTotal = formatCents(totalAmount);

@@ -39,7 +39,7 @@ STRIPE_SECRET_KEY=sk_test_your_secret_key_here
 STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here
 
 # App URL (for Stripe redirects)
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:4600
 ```
 
 ---
@@ -152,7 +152,7 @@ The webhook handler at `/api/stripe/webhook` processes these events:
 | ----------------------- | ----------------------- | ------------------------------------- |
 | `STRIPE_SECRET_KEY`     | `sk_test_...`           | Test secret key from Stripe Dashboard |
 | `STRIPE_WEBHOOK_SECRET` | `whsec_...`             | From `stripe listen` CLI output       |
-| `NEXT_PUBLIC_APP_URL`   | `http://localhost:3000` | Local dev server URL                  |
+| `NEXT_PUBLIC_APP_URL`   | `http://localhost:4600` | Local dev server URL                  |
 
 ---
 
@@ -166,7 +166,7 @@ The webhook handler at `/api/stripe/webhook` processes these events:
 
 ### Checkout redirects to wrong URL
 
-- Verify `NEXT_PUBLIC_APP_URL` is set to `http://localhost:3000`
+- Verify `NEXT_PUBLIC_APP_URL` is set to `http://localhost:4600`
 - Restart the dev server after changing environment variables
 
 ### Payment succeeds but webhook not received
